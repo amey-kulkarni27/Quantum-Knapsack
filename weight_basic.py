@@ -16,12 +16,12 @@ G.add_edges_from([(i, j) for i in range(N) for j in range(i + 1, N)])
 Q = defaultdict(int)
 
 # Constraint specifying weight filled in bag should be as close to its specified capacity
-Wlagrange = 1
+Wlagrange = 20
 
 for i in range(N):
-    Q[(i, i)] += (weights.iloc[i] * (-2 * Wcapacity + weights.iloc[i])) * Wlagrange
+    Q[(i, i)] += (weights[i] * (-2 * Wcapacity + weights[i])) * Wlagrange
     for j in range(i + 1, N):
-        Q[(i, j)] += 2 * Wlagrange * weights.iloc[i] * weights.iloc[j]
+        Q[(i, j)] += 2 * Wlagrange * weights[i] * weights[j]
 
 # Objective function: Maximise values
 # Here we have to present the problem as an energy minimisation problem, hence the minus sign
