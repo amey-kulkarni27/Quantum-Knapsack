@@ -34,3 +34,20 @@ sampleset = sampler.sample_qubo(Q, num_reads=10, chain_strength=1)
 
 # Print the entire sampleset, that is, the entire table
 print(sampleset)
+
+distributions = []
+
+for sample, energy in sampleset.data(['sample', 'energy']):
+    distributions.append(sample)
+
+sol_no = 1
+for d in distributions:
+    val = 0
+    wt = 0
+    for i in range(N):
+        wt += d[i] * weights[i]
+        val += d[i] * values[i]
+    print(str(sol_no) + "-")
+    print("Weight:", wt)
+    print("Value:", val)
+    sol_no += 1
