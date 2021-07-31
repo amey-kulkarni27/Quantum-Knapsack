@@ -17,7 +17,6 @@ Q = defaultdict(int)
 
 # Constraint specifying weight filled in bag should be as close to its specified capacity
 Wlagrange = 3
-
 for i in range(N):
     Q[(i, i)] += (weights[i] * (-2 * Wcapacity + weights[i])) * Wlagrange
     for j in range(i + 1, N):
