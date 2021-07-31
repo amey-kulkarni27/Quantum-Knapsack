@@ -7,7 +7,7 @@ N = 5 # Number of items
 weights = [2, 4, 1, 4, 3]
 values = [3, 2, 1, 5, 2]
 Wcapacity = 9
-precision_bits = 5
+precision_bits = 7
 dim = N * precision_bits
 
 G = nx.Graph()
@@ -17,7 +17,7 @@ G.add_edges_from([(i, j) for i in range(dim) for j in range(i + 1, dim)])
 Q = defaultdict(int)
 
 # Weight constraint
-Wlagrange = 3
+Wlagrange = 5
 for d in range(dim): # N x precision
     i = d // precision_bits # The item number
     p = d % precision_bits + 1 # The p^th of the bits we are using to represent the i^th item
@@ -32,11 +32,11 @@ for d in range(dim): # N x precision
 for d in range(dim): # N x precision
     i = d // precision_bits # The item number
     p = d % precision_bits + 1 # The p^th of the bits we are using to represent the i^th item
-    Q[(d, d)] += values[i] / pow(2, p)
+    Q[(d, d)] -= values[i] / pow(2, p)
 
 
 sampler = EmbeddingComposite(DWaveSampler())
-sampleset = sampler.sample_qubo(Q, num_reads=10, chain_strength=1)
+sampleset = sampler.sample_qubo(Q, num_reads=50, chain_strength=5)
 
 # Print the entire sampleset, that is, the entire table
 print(sampleset)

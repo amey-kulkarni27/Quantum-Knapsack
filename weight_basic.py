@@ -16,7 +16,7 @@ G.add_edges_from([(i, j) for i in range(N) for j in range(i + 1, N)])
 Q = defaultdict(int)
 
 # Constraint specifying weight filled in bag should be as close to its specified capacity
-Wlagrange = 3
+Wlagrange = 10
 for i in range(N):
     Q[(i, i)] += (weights[i] * (-2 * Wcapacity + weights[i])) * Wlagrange
     for j in range(i + 1, N):
@@ -29,7 +29,7 @@ for i in range(N):
 
 
 sampler = EmbeddingComposite(DWaveSampler())
-sampleset = sampler.sample_qubo(Q, num_reads=10, chain_strength=1)
+sampleset = sampler.sample_qubo(Q, num_reads=100, chain_strength=10)
 
 # Print the entire sampleset, that is, the entire table
 print(sampleset)
