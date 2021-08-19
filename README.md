@@ -1,7 +1,7 @@
 # Quantum-Knapsack
 Using Quantum Computing Resources to solve different variations of the Knapsack Problem.
 
-## What it does?
+## What it does
 Attempts the solve the Knapsack problem, including the following variants using Quantum Annealing (provided by DWave Systems)
 1) Only weights and values, either select an item or not (DP works)
 2) Only weights and values, select fractional items (Greedy works)
